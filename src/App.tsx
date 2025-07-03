@@ -9,7 +9,7 @@ function App() {
       <header>
         <Navigation />
       </header>
-      <main className="min-h-[calc(100vh-20rem)]">
+      <main className="min-h-[calc(100vh-44rem)] px-4 sm:px-10">
         <Outlet />
       </main>
       <Footer />

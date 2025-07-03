@@ -119,3 +119,28 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Override browser autofill styles */
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+  -webkit-text-fill-color: black !important;
+  -webkit-caret-color: black !important;
+  caret-color: black !important;
+}
+
+/* For dark mode */
+.dark input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 30px oklch(0.205 0 0) inset !important;
+  -webkit-text-fill-color: oklch(0.985 0 0) !important;
+}
+
+/* For Firefox */
+input:-moz-autofill {
+  background-color: white !important;
+  color: black !important;
+}
+
+.dark input:-moz-autofill {
+  background-color: oklch(0.205 0 0) !important;
+  color: oklch(0.985 0 0) !important;
+}

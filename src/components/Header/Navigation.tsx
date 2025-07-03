@@ -8,7 +8,7 @@ const Navigation = () => {
       <li>
         <NavLink
           to="/all-books"
-          className="text-white font-medium hover:text-fuchsia-300"
+          className="text-white font-medium hover:text-yellow-200"
         >
           All Books
         </NavLink>
@@ -16,7 +16,7 @@ const Navigation = () => {
       <li>
         <NavLink
           to="/create-book"
-          className="text-white font-medium hover:text-fuchsia-300"
+          className="text-white font-medium hover:text-yellow-200"
         >
           Add Book
         </NavLink>
@@ -24,7 +24,7 @@ const Navigation = () => {
       <li>
         <NavLink
           to="/borrow-summary"
-          className="text-white font-medium hover:text-fuchsia-300"
+          className="text-white font-medium hover:text-yellow-200"
         >
           Borrow Summary
         </NavLink>
@@ -41,7 +41,7 @@ const Navigation = () => {
               className="h-5 w-5"
               fill="none"
               viewBox="0 0 24 24"
-              stroke="currentColor"
+              stroke="#fff085"
             >
               {" "}
               <path
@@ -61,7 +61,7 @@ const Navigation = () => {
         </div>
         <Link
           to="/"
-          className="text-xl font-medium text-fuchsia-200 hover:text-fuchsia-300"
+          className="ml-0 lg:ml-4 text-sm sm:text-xl font-medium text-yellow-200 hover:text-yellow-300"
         >
           Bookworm Bridge
         </Link>

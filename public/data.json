@@ -1,0 +1,98 @@
+[
+  {
+    "_id": "6859bfabacfdde0271e6dfe0",
+    "title": "The Theory of Everything",
+    "author": "Stephen Hawking",
+    "genre": "SCIENCE",
+    "isbn": "9780553380163",
+    "description": "An overview of cosmology and black holes.",
+    "copies": 25,
+    "available": true,
+    "createdAt": "2025-06-23",
+    "updatedAt": "2025-06-23"
+  },
+  {
+    "_id": { "$oid": "6859c0dd46055b5cac8f09d4" },
+    "title": "Cosmos",
+    "author": "Carl Sagan",
+    "genre": "SCIENCE",
+    "isbn": "9780345539434",
+    "description": "A comprehensive journey through the universe, exploring its origins, evolution, and our place within it.",
+    "copies": 0,
+    "available": false,
+    "createdAt": "2025-06-23",
+    "updatedAt": "2025-06-23"
+  },
+  {
+    "_id": "685a24a5ad64ecf0c2232ef0",
+    "title": "Sapiens: A Brief History of Humankind",
+    "author": "Yuval Noah Harari",
+    "genre": "HISTORY",
+    "isbn": "9780062316097",
+    "description": "A comprehensive history of humankind, exploring our origins, evolution, and our place within it.",
+    "copies": 10,
+    "available": true,
+    "createdAt": "2025-06-23",
+    "updatedAt": "2025-06-23"
+  },
+  {
+    "_id": "685a24f5ad64ecf0c2232ef7",
+    "title": "Dune",
+    "author": "Frank Herbert",
+    "genre": "FICTION",
+    "isbn": "9780441013593",
+    "description": "Set in the distant future amidst a feudal intergalactic society.",
+    "copies": 2,
+    "available": true,
+    "createdAt": "2025-06-23",
+    "updatedAt": "2025-06-23"
+  },
+  {
+    "_id": "685a2508ad64ecf0c2232ef9",
+    "title": "The Lord of the Rings",
+    "author": "J.R.R. Tolkien",
+    "genre": "FANTASY",
+    "isbn": "9780618053267",
+    "description": "An epic high-fantasy adventure set in Middle-earth.",
+    "copies": 8,
+    "available": true,
+    "createdAt": "2025-06-23",
+    "updatedAt": "2025-06-23"
+  },
+  {
+    "_id": "685a2527ad64ecf0c2232efa",
+    "title": "The Great Gatsby",
+    "author": "F. Scott Fitzgerald",
+    "genre": "FICTION",
+    "isbn": "9780743273565",
+    "description": "A story of love, greed, and the American Dream.",
+    "copies": 3,
+    "available": true,
+    "createdAt": "2025-06-23",
+    "updatedAt": "2025-06-23"
+  },
+  {
+    "_id": "685b00d79326f8702694db05",
+    "title": "Kafka On The Shore",
+    "author": "Haruki Murakami",
+    "genre": "FICTION",
+    "isbn": "97803745335578",
+    "description": "Explores the two systems that drive the way we think.",
+    "copies": 0,
+    "available": false,
+    "createdAt": "2025-06-23",
+    "updatedAt": "2025-06-23"
+  },
+  {
+    "_id": "685b00f59326f8702694db06",
+    "title": "The Color of Magic",
+    "author": "Terry Pratchett",
+    "genre": "FICTION",
+    "isbn": "9780060531051",
+    "description": "A fantasy novel about a young man who becomes a wizard.",
+    "copies": 1,
+    "available": true,
+    "createdAt": "2025-06-23",
+    "updatedAt": "2025-06-23"
+  }
+]

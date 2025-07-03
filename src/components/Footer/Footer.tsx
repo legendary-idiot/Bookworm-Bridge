@@ -16,7 +16,10 @@ const Footer = () => {
         <p>
           <span className="font-bold text-lg">Bookworm Bridge</span>
           <br />
-          Connecting Readers to Their Next Great Read {new Date().getFullYear()}
+          Connecting Readers to Their Next Great Read
+        </p>
+        <p className="font-light">
+          Copyright © {new Date().getFullYear()} - All right reserved
         </p>
       </aside>
       <nav>
