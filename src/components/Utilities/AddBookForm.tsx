@@ -48,7 +48,7 @@ const AddBookForm = () => {
       navigate("/all-books");
     } catch (error) {
       Swal.fire({
-        title: `${error.data.error}` || "Failed to add book",
+        title: "Failed to add book",
         icon: "error",
       });
     }

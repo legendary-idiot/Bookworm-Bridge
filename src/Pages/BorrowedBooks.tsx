@@ -3,7 +3,12 @@ import LoadingSpinner from "@/components/Utilities/LoadingSpinner";
 import { BookOpen, AlertCircle } from "lucide-react";
 
 const BorrowedBooks = () => {
-  const { data: borrowedBooks, isLoading, error } = useGetBorrowedBooksQuery();
+  const {
+    data: borrowedBooks,
+    isLoading,
+    error,
+    refetch,
+  } = useGetBorrowedBooksQuery();
 
   if (isLoading) return <LoadingSpinner />;
 
@@ -15,9 +20,12 @@ const BorrowedBooks = () => {
           <h2 className="text-2xl font-bold text-red-600 mb-4">
             Error Loading Borrowed Books
           </h2>
-          <p className="text-gray-600 my-4">
+          <p className="text-gray-600 mb-4">
             Sorry! Something went wrong while loading your borrowed books.
           </p>
+          <button onClick={() => refetch()} className="btn btn-primary">
+            Try Again
+          </button>
         </div>
       </div>
     );
@@ -32,7 +40,9 @@ const BorrowedBooks = () => {
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center">
                 <BookOpen className="w-6 h-6 text-blue-500 mr-2" />
-                <h2 className="text-lg font-semibold">{book.book.title}</h2>
+                <h2 className="text-lg text-gray-800 font-semibold">
+                  {book.book.title}
+                </h2>
               </div>
             </div>
 

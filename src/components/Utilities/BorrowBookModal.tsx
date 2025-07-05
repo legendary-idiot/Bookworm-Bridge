@@ -3,6 +3,7 @@ import {
   DialogClose,
   DialogContent,
   DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -226,15 +227,18 @@ const BorrowBookModal = ({
         /> */}
 
             <div className="flex justify-end gap-3 pt-4">
-              <DialogClose asChild>
-                <Button
-                  variant="outline"
-                  ref={closeButtonRef}
-                  onClick={() => form.reset()}
-                >
-                  Cancel
-                </Button>
-              </DialogClose>
+              <DialogFooter>
+                <DialogClose asChild>
+                  <Button variant="outline" onClick={() => form.reset()}>
+                    Cancel
+                  </Button>
+                </DialogClose>
+                {/* Hidden close button for programmatic closing after form submission */}
+                <DialogClose asChild>
+                  <button ref={closeButtonRef} className="hidden" />
+                </DialogClose>
+              </DialogFooter>
+
               <Button type="submit" disabled={isLoading} variant="outline">
                 {isLoading ? (
                   <>

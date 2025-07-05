@@ -22,7 +22,7 @@ export const borrowBookApi = baseApi.injectEndpoints({
         method: "POST",
         body: book,
       }),
-      invalidatesTags: ["BorrowedBook"],
+      invalidatesTags: ["BorrowedBook", "Book"],
     }),
   }),
 });
