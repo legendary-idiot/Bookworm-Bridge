@@ -12,7 +12,7 @@ function UpdateBookModal({ id }: { id: string }) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button className="btn btn-warning border-none">Update</button>
+        <button className="btn btn-warning border-none btn-sm">Update</button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>

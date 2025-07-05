@@ -5,6 +5,7 @@ import {
 } from "../redux/api/booksApi";
 import LoadingSpinner from "../components/Utilities/LoadingSpinner";
 import UpdateBookModal from "../components/Utilities/UpdateBookModal";
+import BorrowBookModal from "../components/Utilities/BorrowBookModal";
 import imageCover from "../assets/No-Photo-Cover.png";
 import Swal from "sweetalert2";
 
@@ -164,12 +165,18 @@ const SingleBook = () => {
 
                 {/* Action Buttons */}
                 <div className="flex flex-wrap gap-3 pt-4 border-t border-gray-200 dark:border-gray-700">
-                  <button className="btn btn-primary">Borrow Book</button>
+                  {book.available && book.copies > 0 && (
+                    <BorrowBookModal
+                      bookId={book._id!}
+                      bookTitle={book.title}
+                      availableCopies={book.copies}
+                    />
+                  )}
                   <UpdateBookModal id={book._id!} />
                   <button
                     onClick={handleDelete}
                     disabled={isDeleting}
-                    className="btn btn-error"
+                    className="btn btn-error btn-sm"
                   >
                     {isDeleting ? (
                       <span className="loading loading-spinner loading-sm"></span>

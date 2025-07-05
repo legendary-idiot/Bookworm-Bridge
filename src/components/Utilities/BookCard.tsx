@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import UpdateBookModal from "./UpdateBookModal";
+import BorrowBookModal from "./BorrowBookModal";
 import imageCover from "../../assets/No-Photo-Cover.png";
 import type { Book } from "../../interface/BookInterface";
 import Swal from "sweetalert2";
@@ -67,18 +68,22 @@ const BookCard = ({ book }: { book: Book }) => {
           <div className="flex gap-2 items-center">
             <Link
               to={`/book/${book._id}`}
-              className="btn btn-primary border-none"
+              className="btn btn-primary border-none btn-sm"
             >
               View Details
             </Link>
-            <button className="btn btn-secondary border-none">
-              Borrow Now
-            </button>
+            {book.available && book.copies > 0 && (
+              <BorrowBookModal
+                bookId={book._id!}
+                bookTitle={book.title}
+                availableCopies={book.copies}
+              />
+            )}
           </div>
           <div className="card-actions items-center justify-end">
             <UpdateBookModal id={book._id!} />
             <button
-              className="btn bg-red-500 hover:bg-red-700 border-none"
+              className="btn btn-sm bg-red-500 hover:bg-red-700 border-none"
               onClick={() => handleDelete(book._id!)}
               disabled={isDeleting}
             >

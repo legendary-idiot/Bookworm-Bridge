@@ -40,3 +40,17 @@ export interface UpdateBookRequest {
   copies?: number;
   available?: boolean;
 }
+
+interface BorrowBook {
+  title: string;
+  isbn: string;
+}
+export interface BorrowBookResponse {
+  book: BorrowBook;
+  totalQuantity: number;
+}
+export interface CreateBorrowBookRequest {
+  book: string;
+  quantity: number;
+  dueDate: string;
+}
