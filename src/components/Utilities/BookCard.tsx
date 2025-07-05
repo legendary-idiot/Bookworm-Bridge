@@ -1,12 +1,39 @@
+import { Link } from "react-router";
 import UpdateBookModal from "./UpdateBookModal";
+import imageCover from "../../assets/No-Photo-Cover.png";
+import type { Book } from "../../interface/BookInterface";
+import Swal from "sweetalert2";
+import { useDeleteBookMutation } from "@/redux/api/booksApi";
 
-const BookCard = ({ book }) => {
+const BookCard = ({ book }: { book: Book }) => {
+  const [deleteBook, { isLoading: isDeleting }] = useDeleteBookMutation();
+
+  const handleDelete = (id: string) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        try {
+          deleteBook(id!).unwrap();
+        } catch (error) {
+          console.error("Failed to delete book:", error);
+        }
+      }
+    });
+  };
   return (
     <div className="card dark:bg-gray-800 shadow-sm">
       <figure>
         <img
-          src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-          alt="Shoes"
+          src={imageCover}
+          alt="Book Cover"
+          className="w-full h-full object-cover"
         />
       </figure>
       <div className="card-body">
@@ -37,11 +64,25 @@ const BookCard = ({ book }) => {
         </p>
 
         <div className="flex justify-between items-center flex-wrap gap-2 mt-4">
-          <button className="btn btn-primary border-none">View Details</button>
+          <div className="flex gap-2 items-center">
+            <Link
+              to={`/book/${book._id}`}
+              className="btn btn-primary border-none"
+            >
+              View Details
+            </Link>
+            <button className="btn btn-secondary border-none">
+              Borrow Now
+            </button>
+          </div>
           <div className="card-actions items-center justify-end">
-            <UpdateBookModal />
-            <button className="btn btn-square bg-red-500 hover:bg-red-700 border-none">
-              🗑️
+            <UpdateBookModal id={book._id!} />
+            <button
+              className="btn bg-red-500 hover:bg-red-700 border-none"
+              onClick={() => handleDelete(book._id!)}
+              disabled={isDeleting}
+            >
+              {isDeleting ? "Deleting..." : "🗑️"}
             </button>
           </div>
         </div>

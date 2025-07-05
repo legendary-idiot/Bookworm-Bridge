@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/dialog";
 import UpdateBookForm from "./UpdateBookForm";
 
-function UpdateBookModal() {
+function UpdateBookModal({ id }: { id: string }) {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -18,11 +18,12 @@ function UpdateBookModal() {
         <DialogHeader>
           <DialogTitle>Edit Book Details</DialogTitle>
           <DialogDescription>
-            Make changes to the book details. Click save when you&apos;re done.
+            Make changes to the book details. Click update when you&apos;re
+            done.
           </DialogDescription>
         </DialogHeader>
 
-        <UpdateBookForm />
+        <UpdateBookForm id={id} />
       </DialogContent>
     </Dialog>
   );

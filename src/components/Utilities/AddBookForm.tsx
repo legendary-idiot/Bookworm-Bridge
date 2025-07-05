@@ -15,39 +15,50 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import type { CreateBookRequest } from "@/interface/BookInterface";
+import { useCreateBookMutation } from "@/redux/api/booksApi";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
+import Swal from "sweetalert2";
 
-interface FormData {
-  bookTitle: string;
-  authorName: string;
-  genre:
-    | "FICTION"
-    | "NON_FICTION"
-    | "SCIENCE"
-    | "HISTORY"
-    | "BIOGRAPHY"
-    | "FANTASY";
-  isbn: string;
-  description: string;
-  copies: number;
-}
 const AddBookForm = () => {
-  const form = useForm<FormData>({
+  const [addBook, { isLoading }] = useCreateBookMutation();
+  const navigate = useNavigate();
+  const form = useForm<CreateBookRequest>({
     defaultValues: {
-      bookTitle: "",
-      authorName: "",
+      title: "",
+      author: "",
       isbn: "",
       description: "",
       copies: 0,
     },
   });
-  const onSubmit = (data: FormData) => console.log(data);
+  const onSubmit = async (data: CreateBookRequest) => {
+    const bookData: CreateBookRequest = {
+      ...data,
+      available: data.copies > 0,
+    };
+    try {
+      await addBook(bookData).unwrap();
+      Swal.fire({
+        title: "Book added successfully",
+        icon: "success",
+      });
+      form.reset();
+      navigate("/all-books");
+    } catch (error) {
+      Swal.fire({
+        title: `${error.data.error}` || "Failed to add book",
+        icon: "error",
+      });
+    }
+  };
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
           control={form.control}
-          name="bookTitle"
+          name="title"
           rules={{
             required: "Book Title is required",
           }}
@@ -64,7 +75,7 @@ const AddBookForm = () => {
         />
         <FormField
           control={form.control}
-          name="authorName"
+          name="author"
           rules={{
             required: "Author Name is required",
             minLength: {
@@ -180,8 +191,9 @@ const AddBookForm = () => {
         <button
           className="btn bg-yellow-200 hover:bg-yellow-300 text-black border-none w-full"
           type="submit"
+          disabled={isLoading}
         >
-          Submit
+          {isLoading ? "Adding..." : "Submit"}
         </button>
       </form>
     </Form>

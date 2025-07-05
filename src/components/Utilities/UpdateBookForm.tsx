@@ -19,47 +19,65 @@ import { useForm } from "react-hook-form";
 import { DialogClose, DialogFooter } from "../ui/dialog";
 import { Button } from "../ui/button";
 import { useRef } from "react";
+import type { UpdateBookRequest } from "@/interface/BookInterface";
+import {
+  useGetBookByIdQuery,
+  useUpdateBookMutation,
+} from "@/redux/api/booksApi";
+import LoadingSpinner from "./LoadingSpinner";
+import Swal from "sweetalert2";
 
-interface FormData {
-  bookTitle: string;
-  authorName: string;
-  genre:
-    | "FICTION"
-    | "NON_FICTION"
-    | "SCIENCE"
-    | "HISTORY"
-    | "BIOGRAPHY"
-    | "FANTASY";
-  isbn: string;
-  description: string;
-  copies: number;
-}
-const UpdateBookForm = () => {
-  const form = useForm<FormData>({
+const UpdateBookForm = ({ id }: { id: string }) => {
+  const { data: book, isLoading, error } = useGetBookByIdQuery(id!);
+  const [updateBook, { isLoading: isUpdating }] = useUpdateBookMutation();
+  const form = useForm<UpdateBookRequest>({
     defaultValues: {
-      bookTitle: "",
-      authorName: "",
-      isbn: "",
-      description: "",
-      copies: 0,
+      title: book?.title || "",
+      author: book?.author || "",
+      isbn: book?.isbn || "",
+      genre: book?.genre,
+      description: book?.description || "",
+      copies: book?.copies || 0,
     },
   });
 
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
-  const onSubmit = (data: FormData) => {
-    console.log(data);
-    // Close the dialog after 2 seconds
-    setTimeout(() => {
+  const onSubmit = async (data: UpdateBookRequest) => {
+    const bookData: UpdateBookRequest = {
+      ...data,
+      available: data.copies && data.copies > 0 ? true : false,
+    };
+
+    try {
+      await updateBook({ ...bookData, _id: id }).unwrap();
+      Swal.fire({
+        title: "Book updated successfully",
+        icon: "success",
+      });
+      form.reset();
+
       closeButtonRef.current?.click();
-    }, 2000);
+    } catch (error: unknown) {
+      Swal.fire({
+        title: error instanceof Error ? error.message : "Failed to update book",
+        icon: "error",
+      });
+    }
   };
+  if (isLoading) return <LoadingSpinner />;
+  if (error)
+    return (
+      <div className="text-2xl font-light text-rose-500 my-8">
+        Sorry! Something went wrong.
+      </div>
+    );
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
           control={form.control}
-          name="bookTitle"
+          name="title"
           rules={{
             required: "Book Title is required",
           }}
@@ -76,7 +94,7 @@ const UpdateBookForm = () => {
         />
         <FormField
           control={form.control}
-          name="authorName"
+          name="author"
           rules={{
             required: "Author Name is required",
             minLength: {
@@ -193,8 +211,9 @@ const UpdateBookForm = () => {
         <button
           className="btn bg-yellow-200 hover:bg-yellow-300 text-black border-none w-full"
           type="submit"
+          disabled={isUpdating}
         >
-          Update Changes
+          {isUpdating ? "Updating..." : "Update Changes"}
         </button>
         <DialogFooter>
           <DialogClose asChild>
